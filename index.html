@@ -9,7 +9,22 @@
 <body>
   <h1>Valheim World Share</h1>
     <p>See the list of worlds others have created and shared with the community.</p>
-      <button id="create-world" type="button">Share a World</button>
+      <button id="create-world" type="button">Share a World</button> <br><br>
+      <div>
+        <form id="world-form">
+          <input id="worldname-input" name="name" type="text" placeholder="Enter your world name..." class="input-text">
+          <br><br>
+          <input id="worldseed-input" name="seed" type="text" placeholder="Enter your world seed..." class="input-text">
+          <br><br>
+          <input id="worldimg-input" name="image_url" type="text" placeholder="Image URL of your world" class="input-text">
+          <br><br>
+          <textarea id="worlddesc-input" name="description" rows="5" cols="60" placeholder="Description..." class="input-text"></textarea>
+          <br><br>
+          <input id="worldcreator-input" name="creator" type="text" placeholder="Enter your Steam Name..." class="input-text">
+          <br><br>
+          <input id="create-btn" type="submit" name="submit" value="Post World">
+        </form>
+      </div>
         <div id="worlds-container">
 
         </div>
