@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   getWorlds();
   })
 
+  const createWorldForm = document.querySelector('#world-form')
+  createWorldForm.addEventListener("submit", (e) => handleNewWorld(e))
+
 function getWorlds() {
   fetch(endPoint)
   .then(resp => resp.json())
@@ -21,4 +24,19 @@ function getWorlds() {
     document.querySelector('#worlds-container').innerHTML += worldDiv
     })
   })
+}
+
+function handleNewWorld(e) {
+  e.preventDefault()
+  debugger
+  const nameInput = document.querySelector('#worldname-input').value
+  const seedInput = document.querySelector('#worldseed-input').value
+  const imgUrlInput = document.querySelector('#worldimg-input').value
+  const descInput = document.querySelector('#worlddesc-input').value
+  const creatorInput = document.querySelector('#worldcreator-input').value
+  postFetch(nameInput, seedInput, imgUrlInput, descInput, creatorInput)
+}
+
+function postFetch(name, seed, imgUrl, desc, creator) {
+
 }
