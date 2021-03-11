@@ -9,19 +9,20 @@ class World {
     this.likes = worldAttributes.likes
     World.all.push(this)
   }
-  
+
   renderWorldDiv() {
     return `
-      <div id=${this.id}>
+      <div style="border: solid 1px #CCC;" id=${this.id}>
         <h3>${this.name}</h3>
-        <img src=${this.image_url} alt="map image" width="250: height="300">
-        <h3>${this.seed} </h3>
+        <img style="max-width: 60%;" alt="map image" src=${this.image_url}>
+        <h4>Seed: ${this.seed} </h4>
         <p>${this.description}</p>
         <h5> Creator: ${this.creator} </h5>
         <button data-id=world${this.id}> ${this.likes} Likes </button>
       </div>
       ` 
   }
+
 }
 
 World.all = [];
