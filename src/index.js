@@ -11,17 +11,7 @@ function getWorlds() {
   fetch(endPoint)
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
-    const worldDiv = `
-    <div id=${world.id}>
-      <h3>${world.attributes.name}</h3>
-      <img src=${world.attributes.image_url}>
-      <h3>${world.attributes.seed} </h3>
-      <p>${world.attributes.description}</p>
-      <h5> Creator: ${world.attributes.creator} </h5>
-      <button data-id=world${world.id}> ${world.attributes.likes} Likes </button>
-    </div>
-    ` 
-    document.querySelector('#worlds-container').innerHTML += worldDiv
+    renderWorld(world)
     })
   })
 }
@@ -50,16 +40,21 @@ function postFetch(name, seed, description, image_url, creator) {
   })
   .then(resp => resp.json())
   .then(world => { 
-    const worldDiv = `
-    <div data-id=${world.id}>
-      <h3>${world.name}</h3>
-      <img src=${world.image_url}>
-      <h3>${world.seed} </h3>
-      <p>${world.description}</p>
-      <h5> Creator: ${world.creator} </h5>
-      <button data-id=world${world.id}> ${world.likes} Likes </button>
+    const newWorld = world.data
+    renderWorld(newWorld)
+  })
+}
+
+function renderWorld(obj) {
+  const worldDiv = `
+    <div id=${obj.id}>
+      <h3>${obj.attributes.name}</h3>
+      <img src=${obj.attributes.image_url}>
+      <h3>${obj.attributes.seed} </h3>
+      <p>${obj.attributes.description}</p>
+      <h5> Creator: ${obj.attributes.creator} </h5>
+      <button data-id=world${obj.id}> ${obj.attributes.likes} Likes </button>
     </div>
     ` 
     document.querySelector('#worlds-container').innerHTML += worldDiv
-  })
 }
