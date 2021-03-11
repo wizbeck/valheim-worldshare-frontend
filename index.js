@@ -15,7 +15,7 @@ function getWorlds() {
     <div data-id=${world.id}>
       <h3>${world.attributes.name}</h3>
       <img src=${world.attributes.image_url}>
-      <h3>${world.attributes.seed}
+      <h3>${world.attributes.seed} </h3>
       <p>${world.attributes.description}</p>
       <h5> Creator: ${world.attributes.creator} </h5>
       <button data-id=world${world.id}> ${world.attributes.likes} Likes </button>
@@ -28,7 +28,6 @@ function getWorlds() {
 
 function handleNewWorld(e) {
   e.preventDefault()
-  debugger
   const nameInput = document.querySelector('#worldname-input').value
   const seedInput = document.querySelector('#worldseed-input').value
   const imgUrlInput = document.querySelector('#worldimg-input').value
@@ -38,5 +37,29 @@ function handleNewWorld(e) {
 }
 
 function postFetch(name, seed, imgUrl, desc, creator) {
-
+  fetch(endPoint, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: name,
+      seed: seed,
+      description: desc,
+      image_url: imgUrl,
+      creator: creator
+    })
+  })
+  .then(resp => resp.json())
+  .then(world => { 
+    const worldDiv = `
+    <div data-id=${world.id}>
+      <h3>${world.name}</h3>
+      <img src=${world.image_url}>
+      <h3>${world.seed} </h3>
+      <p>${world.description}</p>
+      <h5> Creator: ${world.creator} </h5>
+      <button data-id=world${world.id}> ${world.likes} Likes </button>
+    </div>
+    ` 
+    document.querySelector('#worlds-container').innerHTML += worldDiv
+  })
 }
