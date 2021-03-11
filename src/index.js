@@ -11,7 +11,8 @@ function getWorlds() {
   fetch(endPoint)
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
-    renderWorld(world)
+    let newWorld = new World(world, world.attributes)
+    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
     })
   })
 }
@@ -40,21 +41,8 @@ function postFetch(name, seed, description, image_url, creator) {
   })
   .then(resp => resp.json())
   .then(world => { 
-    const newWorld = world.data
-    renderWorld(newWorld)
+    const worldData = world.data
+    let newWorld = new World(worldData, worldData.attributes)
+    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
   })
-}
-
-function renderWorld(obj) {
-  const worldDiv = `
-    <div id=${obj.id}>
-      <h3>${obj.attributes.name}</h3>
-      <img src=${obj.attributes.image_url}>
-      <h3>${obj.attributes.seed} </h3>
-      <p>${obj.attributes.description}</p>
-      <h5> Creator: ${obj.attributes.creator} </h5>
-      <button data-id=world${obj.id}> ${obj.attributes.likes} Likes </button>
-    </div>
-    ` 
-    document.querySelector('#worlds-container').innerHTML += worldDiv
 }
