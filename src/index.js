@@ -11,7 +11,9 @@ function getWorlds() {
   fetch(endPoint)
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
-    renderWorld(world)
+    let newWorld = new World(world, world.attributes)
+    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
+    // renderWorld(newWorld)
     })
   })
 }
