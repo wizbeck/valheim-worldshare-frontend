@@ -12,7 +12,7 @@ function getWorlds() {
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
     const worldDiv = `
-    <div data-id=${world.id}>
+    <div id=${world.id}>
       <h3>${world.attributes.name}</h3>
       <img src=${world.attributes.image_url}>
       <h3>${world.attributes.seed} </h3>
@@ -33,18 +33,18 @@ function handleNewWorld(e) {
   const imgUrlInput = document.querySelector('#worldimg-input').value
   const descInput = document.querySelector('#worlddesc-input').value
   const creatorInput = document.querySelector('#worldcreator-input').value
-  postFetch(nameInput, seedInput, imgUrlInput, descInput, creatorInput)
+  postFetch(nameInput, seedInput, descInput, imgUrlInput, creatorInput)
 }
 
-function postFetch(name, seed, imgUrl, desc, creator) {
+function postFetch(name, seed, description, image_url, creator) {
   fetch(endPoint, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify({
       name: name,
       seed: seed,
-      description: desc,
-      image_url: imgUrl,
+      description: description,
+      image_url: image_url,
       creator: creator
     })
   })
