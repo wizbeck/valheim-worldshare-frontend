@@ -12,13 +12,13 @@ class World {
 
   renderWorldDiv() {
     return `
-      <div style="border: solid 1px #CCC;" id=${this.id}>
+      <div style="border: solid 1px #CCC;" id="world${this.id}">
         <h3>${this.name}</h3>
         <img style="max-width: 60%;" alt="map image" src=${this.image_url}>
         <h4>Seed: ${this.seed} </h4>
         <p>${this.description}</p>
         <h5> Creator: ${this.creator} </h5>
-        <button data-id=world${this.id}> ${this.likes} Likes </button>
+        <button class="like-btn" world-id=${this.id}>${this.likes} Likes</button>
       </div>
       ` 
   }

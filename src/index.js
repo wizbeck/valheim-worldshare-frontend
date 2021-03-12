@@ -14,6 +14,17 @@ function getWorlds() {
     let newWorld = new World(world, world.attributes)
     document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
     })
+    let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
+    likeBtnsArray.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault()
+        let worldId = parseInt(e.target.attributes['world-id'].value)
+        let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
+        worldLikes += 1
+        e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
+        patchFetch(worldId, worldLikes);
+      })
+    })
   })
 }
 
@@ -46,3 +57,16 @@ function postFetch(name, seed, description, image_url, creator) {
     document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
   })
 }
+
+function patchFetch(worldId, updatedLikes) {
+  fetch(`http://localhost:3000/api/v1/worlds/${worldId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({
+        likes: updatedLikes
+      })
+    })
+    .then(resp => resp.json())
+    .then(resp => {console.log(resp + 'update successfully')
+    })
+  }
