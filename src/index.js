@@ -16,17 +16,18 @@ function getWorlds() {
     })
     let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
     likeBtnsArray.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault()
-        let worldId = parseInt(e.target.attributes['world-id'].value)
-        let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
-        worldLikes += 1
-        e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
-        patchFetch(worldId, worldLikes);
+      createLikeBtn(btn)
+      // btn.addEventListener("click", (e) => {
+      //   e.preventDefault()
+      //   let worldId = parseInt(e.target.attributes['world-id'].value)
+      //   let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
+      //   worldLikes += 1
+      //   e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
+      //   patchFetch(worldId, worldLikes);
       })
     })
-  })
-}
+  }
+
 
 function handleNewWorld(e) {
   e.preventDefault()
@@ -70,3 +71,21 @@ function patchFetch(worldId, updatedLikes) {
     .then(resp => {console.log(resp + 'update successfully')
     })
   }
+
+  function putWorldsOnDom(worlds) {
+    worlds.data.forEach(world => {
+      let newWorld = new World(world, world.attributes)
+      document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
+  })
+}
+
+function createLikeBtn(btn){
+  btn.addEventListener("click", (e) => {
+    e.preventDefault()
+    let worldId = parseInt(e.target.attributes['world-id'].value)
+    let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
+    worldLikes += 1
+    e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
+    patchFetch(worldId, worldLikes);
+  })
+}
