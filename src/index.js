@@ -55,8 +55,11 @@ function postFetch(name, seed, description, image_url, creator) {
   .then(world => { 
     const worldData = world.data
     let newWorld = new World(worldData, worldData.attributes)
-    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
+    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
+    let btn = document.querySelector(`#world${newWorld.id}`).children[5]
+    createLikeBtn(btn)
   })
+    
 }
 
 function patchFetch(worldId, updatedLikes) {
