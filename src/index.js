@@ -17,19 +17,12 @@ function getWorlds() {
     let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
     likeBtnsArray.forEach(btn => {
       createLikeBtn(btn)
-      // btn.addEventListener("click", (e) => {
-      //   e.preventDefault()
-      //   let worldId = parseInt(e.target.attributes['world-id'].value)
-      //   let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
-      //   worldLikes += 1
-      //   e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
-      //   patchFetch(worldId, worldLikes);
       })
     })
   }
 
 
-function handleNewWorld(e) {
+const handleNewWorld = (e) => {
   e.preventDefault()
   const nameInput = document.querySelector('#worldname-input').value
   const seedInput = document.querySelector('#worldseed-input').value
@@ -56,8 +49,8 @@ function postFetch(name, seed, description, image_url, creator) {
     const worldData = world.data
     let newWorld = new World(worldData, worldData.attributes)
     document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
-    let btn = document.querySelector(`#world${newWorld.id}`).children[5]
-    createLikeBtn(btn)
+    let newWorldBtn = document.querySelector(`#world${newWorld.id}`).children[5]
+    createLikeBtn(newWorldBtn)
   })
     
 }
@@ -82,7 +75,7 @@ function patchFetch(worldId, updatedLikes) {
   })
 }
 
-function createLikeBtn(btn){
+function createLikeBtn(btn) {
   btn.addEventListener("click", (e) => {
     e.preventDefault()
     let worldId = parseInt(e.target.attributes['world-id'].value)

@@ -7,6 +7,7 @@ class World {
     this.image_url = worldAttributes.image_url
     this.creator = worldAttributes.creator
     this.likes = worldAttributes.likes
+    this.comments = worldAttributes.comments
     World.all.push(this)
   }
 
@@ -19,6 +20,8 @@ class World {
         <p>${this.description}</p>
         <h5> Creator: ${this.creator} </h5>
         <button class="like-btn" world-id=${this.id}>${this.likes} Likes</button>
+        <div id="comments${this.id}">
+          <h5> Comments: </h5>
       </div>
       ` 
   }
