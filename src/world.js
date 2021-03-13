@@ -13,7 +13,7 @@ class World {
 
   renderWorldDiv() {
     return `
-      <div style="border: solid 1px #CCC;" id="world${this.id}">
+      <div style="border: solid 3px #CCC;" id="world${this.id}">
         <h3>${this.name}</h3>
         <img style="max-width: 60%;" alt="map image" src=${this.image_url}>
         <h4>Seed: ${this.seed} </h4>
@@ -21,9 +21,24 @@ class World {
         <h5> Creator: ${this.creator} </h5>
         <button class="like-btn" world-id=${this.id}>${this.likes} Likes</button>
         <div id="comments${this.id}">
-          <h5> Comments: </h5>
+          <details>
+          <summary> Comments: </summary> 
+          <ul>
+          </ul>
       </div>
       ` 
+  }
+
+  renderComments() {
+    this.comments.forEach(comment => {
+      let commentBox = document.querySelector(`#comments${this.id}`).children[0].children[1]
+      commentBox.innerHTML += `
+      <li>
+        <p>${comment.content}</p>
+        <p> Written By: ${comment.author}
+      </li>
+      `
+    })
   }
 
 }
