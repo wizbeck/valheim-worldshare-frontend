@@ -50,6 +50,7 @@ function postFetch(name, seed, description, image_url, creator) {
     const worldData = world.data
     let newWorld = new World(worldData, worldData.attributes)
     document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
+    newWorld.renderComments();
     let newWorldBtn = document.querySelector(`#world${newWorld.id}`).children[5]
     createLikeBtn(newWorldBtn)
   })
@@ -86,14 +87,3 @@ function createLikeBtn(btn) {
     patchFetch(worldId, worldLikes);
   })
 }
-
-// let setupComments = (worldData) => {
-//   let comments = worldData.attributes.comments
-//   comments.forEach(comment => {
-//     comment.content
-//     comment.author
-
-
-//   })
-// }
-// }

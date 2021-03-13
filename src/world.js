@@ -25,6 +25,15 @@ class World {
           <summary> Comments: </summary> 
           <ul>
           </ul>
+          <br>
+          <h4> Leave a comment for ${this.name}: </h4>
+          <form id="comments-${this.id}">
+              <textarea id="commentcontent-input" name="content" rows="3" cols="40" placeholder="Write your comment..." class="input-text"></textarea>
+              <br>
+              <input id="commentauthor-input" name="author" type="text" placeholder="Your name goes here..." class="input-text">
+              <br>
+              <input id="createcomment-btn" type="submit" name="submit" value="Post Comment">
+            </form>
       </div>
       ` 
   }
@@ -34,8 +43,8 @@ class World {
       let commentBox = document.querySelector(`#comments${this.id}`).children[0].children[1]
       commentBox.innerHTML += `
       <li>
-        <p>${comment.content}</p>
-        <p> Written By: ${comment.author}
+        <p>" ${comment.content} "</p>
+        <p> - ${comment.author}
       </li>
       `
     })
