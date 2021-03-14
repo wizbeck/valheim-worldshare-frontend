@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const createWorldForm = document.querySelector('#world-form')
   createWorldForm.addEventListener("submit", (e) => handleNewWorld(e))
+  const worldContainer = document.getElementById('worlds-container')
 
 function getWorlds() {
   fetch(endPoint)
@@ -17,7 +18,7 @@ function getWorlds() {
     })
     let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
     likeBtnsArray.forEach(btn => {
-      createLikeBtn(btn)
+      createLikeBtn(btn);
       })
     })
   }
@@ -73,7 +74,8 @@ function patchFetch(worldId, updatedLikes) {
   function putWorldsOnDom(worlds) {
     worlds.data.forEach(world => {
       let newWorld = new World(world, world.attributes)
-      document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv()
+      document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
+      newWorld.renderComments();
   })
 }
 
@@ -83,7 +85,7 @@ function createLikeBtn(btn) {
     let worldId = parseInt(e.target.attributes['world-id'].value)
     let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
     worldLikes += 1
-    e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
+    e.target.innerText = `${parseInt(e.target.innerText.split(' ')[0]) + 1}` + ' Likes'
     patchFetch(worldId, worldLikes);
   })
 }
