@@ -13,7 +13,8 @@ class World {
 
   renderWorld() {
 
-    let div = document.createElement("div.worlds")
+    let div = document.createElement("div")
+    div.setAttribute("class", "worlds")
     let h3 = document.createElement("h3")
     let imgUrl = document.createElement("img")
     let h4 = document.createElement("h4")
@@ -36,14 +37,41 @@ class World {
     div.append(h3, imgUrl, h4, p, h5, button)
 
     let commentDiv = document.createElement("div")
+    commentDiv.id = `comments${this.id}`
     let detail = document.createElement("details")
     let summ = document.createElement("summary")
-    let ul = document.createElement("ul")
-
-    commentDiv.id = `comments${this.id}`
     summ.innerText = "Comments:"
-    
+    let commh4 = document.createElement("h4")
+    commh4.innerText = `Leave a comment for ${this.name}`
+    let ul = document.createElement("ul")
+    detail.append(summ, ul)
+    commentDiv.append(detail)
 
+    div.append(commentDiv);
+
+    //comment form and attributes
+    let commentForm = document.createElement("form")
+    let contentInput = document.createElement("textarea")
+    contentInput.setAttribute("id", "content-input")
+    contentInput.setAttribute("name", "content")
+    contentInput.setAttribute("rows", "3")
+    contentInput.setAttribute("cols", "40")
+    contentInput.setAttribute("placeholder", "Write your comment...")
+    
+    let authorInput = document.createElement("input")
+    authorInput.setAttribute("id", "author-input")
+    authorInput.setAttribute("type", "text")
+    authorInput.setAttribute("placeholder", "name here...")
+    authorInput.setAttribute("name", "author")
+
+    let commentSubmit = document.createElement("input")
+    commentSubmit.setAttribute("type", "submit")
+    commentSubmit.setAttribute("value", "Post Comment")
+    commentSubmit.setAttribute("id", "comment-submit")
+
+    commentForm.append(contentInput, authorInput, commentSubmit);
+
+    detail.append(commentForm);
     
     let worldContainer = document.querySelector('#worlds-container')
     worldContainer.append(div)
@@ -79,18 +107,17 @@ class World {
   //     ` 
   // }
 
-  // renderComments() {
-  //   this.comments.forEach(comment => {
-  //     let li = document.createElement("li")
-  //     let pContent = document.createElement("p")
-  //     let pAuthor = document.createElement("p")
-  //     pContent.innerText = `"${comment.content}"`
-  //     pAuthor.innerText = `- ${comment.author}`
-  //     li.append(pContent, pAuthor)
-  //     let commentBox = document.querySelector(`#comments${this.id}`).children[0].children[1]
-  //     commentBox.appendChild(li)  
-  //   })
-  // }
+  renderComments() {
+    this.comments.forEach(comment => {
+      let li = document.createElement("li")
+      let pContent = document.createElement("p")
+      let pAuthor = document.createElement("p")
+      pContent.innerText = `"${comment.content}"`
+      pAuthor.innerText = `- ${comment.author}`
+      li.append(pContent, pAuthor)
+        
+    })
+  }
 
 
 }
