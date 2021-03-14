@@ -12,7 +12,8 @@ class World {
   }
 
   renderWorld() {
-    let div = document.createElement("div")
+
+    let div = document.createElement("div.worlds")
     let h3 = document.createElement("h3")
     let imgUrl = document.createElement("img")
     let h4 = document.createElement("h4")
@@ -20,20 +21,34 @@ class World {
     let h5 = document.createElement("h5")
     let button = document.createElement("button")
 
+    div.id = `world${this.id}`
+    div.class = "world"
+    h3.innerText = `${this.name}`
+    imgUrl.src = `${this.image_url}`
+    imgUrl.style = "max-width: 60%;"
+    h4.innerText = `Seed: ${this.seed}`
+    p.innerText = `${this.description}`
+    h5.innerText = `Creator: ${this.creator}`
+    button.id = `btn-${this.id}`
+    button.innerText = `${this.likes} Likes`
+    // add button event listener to handle likes eventually
+
+    div.append(h3, imgUrl, h4, p, h5, button)
+
     let commentDiv = document.createElement("div")
     let detail = document.createElement("details")
     let summ = document.createElement("summary")
     let ul = document.createElement("ul")
 
-    div.id = `world${this.id}`
-    h3.innerText = `${this.name}`
-    imgUrl.src = `${this.image_url}`
-    h4.innerText = `Seed: ${this.seed}`
-    p.innerText = `${this.description}`
-    h5.innerText = `Creator: ${this.creator}`
-    button.id = `btn-${this.id}`
-    
     commentDiv.id = `comments${this.id}`
+    summ.innerText = "Comments:"
+    
+
+    
+    let worldContainer = document.querySelector('#worlds-container')
+    worldContainer.append(div)
+
+    
   }
 
 
@@ -64,18 +79,18 @@ class World {
   //     ` 
   // }
 
-  renderComments() {
-    this.comments.forEach(comment => {
-      let li = document.createElement("li")
-      let pContent = document.createElement("p")
-      let pAuthor = document.createElement("p")
-      pContent.innerText = `"${comment.content}"`
-      pAuthor.innerText = `- ${comment.author}`
-      li.append(pContent, pAuthor)
-      let commentBox = document.querySelector(`#comments${this.id}`).children[0].children[1]
-      commentBox.appendChild(li)  
-    })
-  }
+  // renderComments() {
+  //   this.comments.forEach(comment => {
+  //     let li = document.createElement("li")
+  //     let pContent = document.createElement("p")
+  //     let pAuthor = document.createElement("p")
+  //     pContent.innerText = `"${comment.content}"`
+  //     pAuthor.innerText = `- ${comment.author}`
+  //     li.append(pContent, pAuthor)
+  //     let commentBox = document.querySelector(`#comments${this.id}`).children[0].children[1]
+  //     commentBox.appendChild(li)  
+  //   })
+  // }
 
 
 }

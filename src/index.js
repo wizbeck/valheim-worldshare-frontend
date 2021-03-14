@@ -13,8 +13,8 @@ function getWorlds() {
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
     let newWorld = new World(world, world.attributes)
-    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
-    newWorld.renderComments();
+    newWorld.renderWorld();
+    // newWorld.renderComments();
     })
     let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
     likeBtnsArray.forEach(btn => {
@@ -82,10 +82,11 @@ function patchFetch(worldId, updatedLikes) {
 function createLikeBtn(btn) {
   btn.addEventListener("click", (e) => {
     e.preventDefault()
+    debugger
     let worldId = parseInt(e.target.attributes['world-id'].value)
     let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
     worldLikes += 1
-    e.target.innerText = `${parseInt(e.target.innerText.split(' ')[0]) + 1}` + ' Likes'
+    e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
     patchFetch(worldId, worldLikes);
   })
 }
