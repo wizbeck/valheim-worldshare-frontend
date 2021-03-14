@@ -23,7 +23,6 @@ class World {
     let button = document.createElement("button")
 
     div.id = `world${this.id}`
-    div.class = "world"
     h3.innerText = `${this.name}`
     imgUrl.src = `${this.image_url}`
     imgUrl.style = "max-width: 60%;"
@@ -67,7 +66,7 @@ class World {
     let commentSubmit = document.createElement("input")
     commentSubmit.setAttribute("type", "submit")
     commentSubmit.setAttribute("value", "Post Comment")
-    commentSubmit.setAttribute("id", "comment-submit")
+    commentSubmit.setAttribute("id", `commentsubmit-${this.id}`)
 
     commentForm.append(contentInput, authorInput, commentSubmit);
 
@@ -75,39 +74,20 @@ class World {
     
     let worldContainer = document.querySelector('#worlds-container')
     worldContainer.append(div)
+    
+    this.renderWorldComments();
+
+
+    commentForm.addEventListener("submit", (e) => {
+     handleNewComment(e);
+    })
+    
 
     
   }
 
 
-  // renderWorldDiv() {
-  //   return `
-  //     <div style="border: solid 3px #CCC;" id="world${this.id}">
-  //       <h3>${this.name}</h3>
-  //       <img style="max-width: 60%;" alt="map image" src=${this.image_url}>
-  //       <h4>Seed: ${this.seed} </h4>
-  //       <p>${this.description}</p>
-  //       <h5> Creator: ${this.creator} </h5>
-  //       <button class="like-btn" world-id=${this.id}>${this.likes} Likes</button>
-  //       <div id="comments${this.id}">
-  //         <details>
-  //         <summary> Comments: </summary> 
-  //         <ul>
-  //         </ul>
-  //         <br>
-  //         <h4> Leave a comment for ${this.name}: </h4>
-  //         <form id="commentform-${this.id}">
-  //             <textarea id="commentcontent-input" name="content" rows="3" cols="40" placeholder="Write your comment..." class="input-text"></textarea>
-  //             <br>
-  //             <input id="commentauthor-input" name="author" type="text" placeholder="Your name goes here..." class="input-text">
-  //             <br>
-  //             <input class="createcomment-btn" id="comment${this.id}" type="submit" name="submit" value="Post Comment">
-  //           </form>
-  //     </div>
-  //     ` 
-  // }
-
-  renderComments() {
+  renderWorldComments() {
     this.comments.forEach(comment => {
       let li = document.createElement("li")
       let pContent = document.createElement("p")
@@ -115,9 +95,11 @@ class World {
       pContent.innerText = `"${comment.content}"`
       pAuthor.innerText = `- ${comment.author}`
       li.append(pContent, pAuthor)
-        
+      let ul = document.querySelector(`#comments${this.id}`).children[0].children[1]
+      ul.append(li)
     })
   }
+
 
 
 }

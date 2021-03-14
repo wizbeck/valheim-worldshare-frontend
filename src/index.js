@@ -1,4 +1,5 @@
 const endPoint = "http://localhost:3000/api/v1/worlds"
+const commentsEndPoint = "http://localhost:3000/api/v1/comments"
 
 document.addEventListener("DOMContentLoaded", () => {
   getWorlds();
@@ -14,11 +15,6 @@ function getWorlds() {
   .then(worlds => { worlds.data.forEach(world => {
     let newWorld = new World(world, world.attributes)
     newWorld.renderWorld();
-    // newWorld.renderComments();
-    })
-    let likeBtnsArray = Array.from(document.getElementsByClassName('like-btn'));
-    likeBtnsArray.forEach(btn => {
-      createLikeBtn(btn);
       })
     })
   }
@@ -32,6 +28,31 @@ const handleNewWorld = (e) => {
   const descInput = document.querySelector('#worlddesc-input').value
   const creatorInput = document.querySelector('#worldcreator-input').value
   postFetch(nameInput, seedInput, descInput, imgUrlInput, creatorInput)
+}
+
+function handleNewComment(e) {
+  e.preventDefault();
+      const worldId = parseInt(e.target.children[2].id.split('-')[1])
+      const commentContent = e.target.children[0].value
+      const commentAuthor = e.target.children[1].value
+  fetch(commentsEndPoint, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      content: commentContent,
+      author: commentAuthor,
+      world_id: worldId
+    })
+  })
+  .then(resp => resp.json())
+  .then(comment => {
+    let commentData = comment.data
+    debugger
+    let newComment = new Comment(commentData, commentData.attributes)
+    
+    newComment.renderComment();
+  })
+  
 }
 
 function postFetch(name, seed, description, image_url, creator) {
@@ -50,10 +71,7 @@ function postFetch(name, seed, description, image_url, creator) {
   .then(world => { 
     const worldData = world.data
     let newWorld = new World(worldData, worldData.attributes)
-    document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
-    newWorld.renderComments();
-    let newWorldBtn = document.querySelector(`#world${newWorld.id}`).children[5]
-    createLikeBtn(newWorldBtn)
+    newWorld.renderWorld();
   })
     
 }
@@ -71,22 +89,18 @@ function patchFetch(worldId, updatedLikes) {
     })
   }
 
-  function putWorldsOnDom(worlds) {
-    worlds.data.forEach(world => {
-      let newWorld = new World(world, world.attributes)
-      document.querySelector('#worlds-container').innerHTML += newWorld.renderWorldDiv();
-      newWorld.renderComments();
-  })
-}
+  
+// function createLikeBtn(btn) {
+//   btn.addEventListener("click", (e) => {
+//     e.preventDefault()
+//     debugger
+//     let worldId = parseInt(e.target.attributes['world-id'].value)
+//     let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
+//     worldLikes += 1
+//     e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
+//     patchFetch(worldId, worldLikes);
+//   })
+// }
 
-function createLikeBtn(btn) {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault()
-    debugger
-    let worldId = parseInt(e.target.attributes['world-id'].value)
-    let worldLikes = parseInt(e.target.innerHTML.split(' ')[0])
-    worldLikes += 1
-    e.target.innerHTML = `${parseInt(e.target.innerHTML.split(' ')[0]) + 1}` + ' Likes'
-    patchFetch(worldId, worldLikes);
-  })
-}
+
+
