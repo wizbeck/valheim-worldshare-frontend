@@ -10,10 +10,10 @@ BACKEND REPO:
 
 THINGS TO KNOW BEFORE TESTING: 
 
--There is some seed data as an example so that its not a barren SPA.
+- There is some seed data as an example so that its not a barren SPA.
 
--Postgresql was used to manage the database rather than sqlite3
+- Postgresql was used to manage the database rather than sqlite3
 
--Project AS IS for time being is MVP for now as I learn more about javascript and css.
+- Project AS IS for time being is MVP for now as I learn more about javascript and css.
 
 - I have a stretch feature commented out in the code right now. Like buttons are visible but not working at the moment.
