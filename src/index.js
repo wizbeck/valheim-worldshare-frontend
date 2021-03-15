@@ -35,6 +35,7 @@ function handleNewComment(e) {
       const worldId = parseInt(e.target.children[2].id.split('-')[1])
       const commentContent = e.target.children[0].value
       const commentAuthor = e.target.children[1].value
+
   fetch(commentsEndPoint, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -46,13 +47,11 @@ function handleNewComment(e) {
   })
   .then(resp => resp.json())
   .then(comment => {
-    let commentData = comment.data
-    debugger
-    let newComment = new Comment(commentData, commentData.attributes)
-    
+    const commentData = comment.data
+    let newComment = new Comment(commentData, commentData.attributes);
     newComment.renderComment();
-  })
   
+  })
 }
 
 function postFetch(name, seed, description, image_url, creator) {

@@ -8,7 +8,8 @@ class Comment {
   }
 
   renderComment() {
-    let ul = document.getElementById(`#comments${this.id}`).children[0].children[1]
+    debugger
+    let ul = document.getElementById(`comments${this.world_id}`).children[0].children[1]
     let li = document.createElement("li")
     let pContent = document.createElement("p")
     let pAuthor = document.createElement("p")
