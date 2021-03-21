@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   createWorldForm.addEventListener("submit", (e) => handleNewWorld(e))
   const worldContainer = document.getElementById('worlds-container')
 
-function getWorlds() {
+const getWorlds = () => {
   fetch(endPoint)
   .then(resp => resp.json())
   .then(worlds => { worlds.data.forEach(world => {
@@ -30,7 +30,7 @@ const handleNewWorld = (e) => {
   postFetch(nameInput, seedInput, descInput, imgUrlInput, creatorInput)
 }
 
-function handleNewComment(e) {
+const handleNewComment = (e) => {
   e.preventDefault();
       const worldId = parseInt(e.target.children[2].id.split('-')[1])
       const commentContent = e.target.children[0].value
@@ -54,7 +54,7 @@ function handleNewComment(e) {
   })
 }
 
-function postFetch(name, seed, description, image_url, creator) {
+const postFetch = (name, seed, description, image_url, creator) => {
   fetch(endPoint, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
@@ -75,7 +75,7 @@ function postFetch(name, seed, description, image_url, creator) {
     
 }
 
-function patchFetch(worldId, updatedLikes) {
+const patchFetch = (worldId, updatedLikes) => {
   fetch(`http://localhost:3000/api/v1/worlds/${worldId}`, {
     method: "PATCH",
     headers: { "Content-Type": "application/json"},

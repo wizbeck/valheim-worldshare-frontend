@@ -7,7 +7,7 @@ class Comment {
     Comment.all.push(this)
   }
 
-  renderComment() {
+  renderComment = () => {
     let ul = document.getElementById(`comments${this.world_id}`).children[0].children[1]
     let li = document.createElement("li")
     let pContent = document.createElement("p")

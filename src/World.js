@@ -11,7 +11,7 @@ class World {
     World.all.push(this)
   }
 
-  renderWorld() {
+  renderWorld = () => {
 
     let div = document.createElement("div")
     div.setAttribute("class", "worlds")
@@ -88,7 +88,7 @@ class World {
   }
 
 
-  renderWorldComments() {
+  renderWorldComments = () => {
     this.comments.forEach(comment => {
       let li = document.createElement("li")
       let pContent = document.createElement("p")
