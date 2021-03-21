@@ -3,19 +3,28 @@ summary {
 }
  body {
    background-color: rgb(192, 219, 245);
-   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+   
  }
+
+#create-btn {
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+  color: 
+}
 
  div#form-container {
    background-color: papayawhip;
    padding: 20px;
-   border-radius: 10px;
+   border-radius: 30px;
    text-align: center;
  }
 
  li {
-  background-color: gray;
+  border: 3px solid darkslategray;
+  background-color: rgb(187, 187, 187);
   padding: 10px;
   border-radius: 15px, 30px;
   list-style: none;
+  margin-top: 5px;
  }
