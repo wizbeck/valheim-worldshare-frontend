@@ -1,3 +1,21 @@
 summary {
   cursor: pointer;
 }
+ body {
+   background-color: rgb(192, 219, 245);
+   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+ }
+
+ div#form-container {
+   background-color: papayawhip;
+   padding: 20px;
+   border-radius: 10px;
+   text-align: center;
+ }
+
+ li {
+  background-color: gray;
+  padding: 10px;
+  border-radius: 15px, 30px;
+  list-style: none;
+ }
