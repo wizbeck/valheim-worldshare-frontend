@@ -29,12 +29,13 @@ class World {
     h4.innerText = `Seed: ${this.seed}`
     p.innerText = `${this.description}`
     h5.innerText = `Creator: ${this.creator}`
+    // add button event listener to handle likes eventually
     button.id = `btn-${this.id}`
     button.innerText = `${this.likes} Likes`
-    // add button event listener to handle likes eventually
 
     div.append(h3, imgUrl, h4, p, h5, button)
-
+    
+    // comments section to add to DOM
     let commentDiv = document.createElement("div")
     commentDiv.id = `comments${this.id}`
     let detail = document.createElement("details")
