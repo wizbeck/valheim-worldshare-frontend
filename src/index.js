@@ -50,7 +50,7 @@ const handleNewComment = (e) => {
     const commentData = comment.data
     let newComment = new Comment(commentData, commentData.attributes);
     newComment.renderComment();
-  
+    document.getElementById(`comments${newComment.world_id}`).children[0].children[2].reset();
   })
 }
 
@@ -71,6 +71,7 @@ const postFetch = (name, seed, description, image_url, creator) => {
     const worldData = world.data
     let newWorld = new World(worldData, worldData.attributes)
     newWorld.renderWorld();
+    document.getElementById('world-form').reset();
   })
     
 }

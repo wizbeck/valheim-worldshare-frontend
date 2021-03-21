@@ -17,7 +17,9 @@ class Comment {
     li.append(pContent, pAuthor)
     ul.append(li)
   }
+  
 
 
 }
 Comment.all = [];
+

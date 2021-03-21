@@ -83,7 +83,6 @@ class World {
      handleNewComment(e);
     })
     
-
     
   }
 
