@@ -76,18 +76,20 @@ const postFetch = (name, seed, description, image_url, creator) => {
     
 }
 
-const patchFetch = (worldId, updatedLikes) => {
-  fetch(`http://localhost:3000/api/v1/worlds/${worldId}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json"},
-    body: JSON.stringify({
-        likes: updatedLikes
-      })
-    })
-    .then(resp => resp.json())
-    .then(resp => {console.log(resp + 'update successfully')
-    })
-  }
+//Like button code - stretch feature
+
+// const patchFetch = (worldId, updatedLikes) => {
+//   fetch(`http://localhost:3000/api/v1/worlds/${worldId}`, {
+//     method: "PATCH",
+//     headers: { "Content-Type": "application/json"},
+//     body: JSON.stringify({
+//         likes: updatedLikes
+//       })
+//     })
+//     .then(resp => resp.json())
+//     .then(resp => {console.log(resp + 'update successfully')
+//     })
+//   }
 
   
 // function createLikeBtn(btn) {
