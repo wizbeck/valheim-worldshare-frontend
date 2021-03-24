@@ -76,6 +76,18 @@ const postFetch = (name, seed, description, image_url, creator) => {
     
 }
 
+const searchBar = document.getElementById('search')
+
+searchBar.addEventListener("keyup", (e) => filterSearch(e))
+
+function filterSearch(input){
+ let searchedWorlds = World.all.filter(n => {return n.name.toUpperCase().includes(input.target.value.toUpperCase())})
+  worldContainer.innerHTML = ""
+  searchedWorlds.forEach(w => {
+    w.renderWorld();
+  })
+}
+
 //Like button code - stretch feature
 
 // const patchFetch = (worldId, updatedLikes) => {
