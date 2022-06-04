@@ -1,17 +1,19 @@
 const loadNewWorldForm = (root) => {
   // FORM CONTAINER
   let parent = buildElWithAttrs(
-    document.createElement('div'),
+    document.createElement('DIV'),
     {id: 'formContainer'}
   );
   let form = buildElWithAttrs(
     document.createElement('FORM'),
     {
-      id: 'worldForm',
-      method: 'POST',
-      action: endPoint // from index.js
+      id: 'worldForm'
     }
   );
+  let header = document.createElement('h3');
+  header.innerHTML = 'Share your Worlds!';
+  parent.appendChild(header);
+
   // BEGIN CHILDREN
   let formInputs = [];
   // name
@@ -61,7 +63,7 @@ const loadNewWorldForm = (root) => {
   );
   // Submit Button
   formInputs[4] = buildElWithAttrs(
-    document.createElement('BUTTON'),
+    document.createElement('INPUT'),
     {
       id: 'create-btn',
       type: 'submit',
@@ -70,19 +72,21 @@ const loadNewWorldForm = (root) => {
     }
   );
   // Append children to form
-  while (formInputs.length != 0) {
-    form.appendChild(formInputs.shift)
+  while (formInputs.length > 0) {
+    form.appendChild(formInputs.shift())
     if (formInputs.length != 0) {
       form.appendChild(document.createElement('br'))
     }
   }
-  parent.appendChild(form)
+  parent.appendChild(form);
   root.appendChild(parent);
 }
-
+// global function for building html nodes with attributes
 const buildElWithAttrs = (node, attrs={}) => {
-  for (let [attr, value] of Object.entries(attrs)) {
-    node.setAttribute(attr, value)
+  if (Object.entries(attrs).length > 0) {
+    for (let [attr, value] of Object.entries(attrs)) {
+      node.setAttribute(attr, value)
+    }
   }
   return node;
 };
