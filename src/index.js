@@ -1,7 +1,11 @@
-const endPoint = "http://localhost:3000/api/v1/worlds"
-const commentsEndPoint = "http://localhost:3000/api/v1/comments"
+var endPoint = "http://localhost:3000/api/v1/worlds"
+var commentsEndPoint = "http://localhost:3000/api/v1/comments"
 
 document.addEventListener("DOMContentLoaded", () => {
+  // checkLogin(); this should hit the before !authenticate_user filter method on backend,
+  // if user is logged in we should render the valheim worlds,
+  // else, we render the login form
+  // login form, should have sign up button -> changes login form to have a sign up button.
   getWorlds();
   })
 
@@ -115,6 +119,3 @@ function filterSearch(input){
 //     patchFetch(worldId, worldLikes);
 //   })
 // }
-
-
-

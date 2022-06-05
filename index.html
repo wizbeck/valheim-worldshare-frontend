@@ -9,32 +9,18 @@
 </head>
 <body>
   <h1>Valheim World Share</h1>
-    
-      <div id="form-container">
-        <h3>Share your World:</h3>
-        <form id="world-form">
-          <input id="worldname-input" name="name" type="text" placeholder="Enter your world name..." class="input-text">
-          <br><br>
-          <input id="worldseed-input" name="seed" type="text" placeholder="Enter your world seed..." class="input-text">
-          <br><br>
-          <input id="worldimg-input" name="image_url" type="text" placeholder="Image URL of your world" class="input-text">
-          <br><br>
-          <textarea id="worlddesc-input" name="description" rows="5" cols="60" placeholder="Description..." class="input-text"></textarea>
-          <br><br>
-          <input id="worldcreator-input" name="creator" type="text" placeholder="Enter your Steam Name..." class="input-text">
-          <br><br>
-          <input id="create-btn" type="submit" name="submit" value="Post World">
-        </form>
-      </div>
+  
+    <div id="root"></div>
       <h2>Posted Worlds:</h2>
       <p>See the list of worlds others have created and shared with the community.</p>
+      <!-- Wrap this in a different script?, should be part of index component that renders list of worlds -->
       <h3>Search by name:</h3>
       <input id="search" type=text />
         <div id="worlds-container">
-
         </div>
   
 </body>
+<script type="text/javascript" src="src/newWorldForm.js"></script>
 <script type="text/javascript" src="src/Comment.js"></script>
 <script type="text/javascript" src="src/World.js"></script>
 <script type="text/javascript" src="src/index.js"></script>
