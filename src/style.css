@@ -2,7 +2,7 @@ summary {
   cursor: pointer;
 }
  body {
-   background-color: rgb(192, 219, 245);
+   background-color: #c0dbf5;
    
  }
 
@@ -10,19 +10,19 @@ summary {
   border-radius: 5px;
   cursor: pointer;
   padding: 10px;
-  color: 
+  color: #afb49f
 }
 
  div#form-container {
-   background-color: papayawhip;
+   background-color: #ffefd5;
    padding: 20px;
    border-radius: 30px;
    text-align: center;
  }
 
  li {
-  border: 3px solid darkslategray;
-  background-color: rgb(187, 187, 187);
+  border: 3px solid #2f4f4f;
+  background-color: #bbbbbb;
   padding: 10px;
   border-radius: 15px, 30px;
   list-style: none;
