@@ -13,12 +13,12 @@ User story:
 Users should be able to:
 1. Log in securely (API token authentication - JWT?)
  - every internal feature implemented should have a guard check to verify the user is logged in and auth'd before using, if not they should be blocked to the login/signup screen
- ~> create a login/signup form to switch dynamically
+ - [ ] create a login/signup form to switch dynamically
   - implement captcha to verify they are human before signing up?, or send a confirmation link?
   
 2. Users can post content showing off their worlds and progress to other users,
-
-3. Users should be able to edit and update their content
+   - [ ] build a way to manage content for users (base idea)
+1. Users should be able to edit and update their content
 
 3.5. Users can interact with other users' content
   - likes
