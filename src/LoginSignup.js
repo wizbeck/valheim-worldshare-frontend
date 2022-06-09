@@ -4,11 +4,37 @@ class LoginForm {
     this.rootNode = document.createElement("FORM");
     this.email = document.createElement("INPUT");
     this.password = document.createElement("INPUT");
+    this.submit = document.createElement("BUTTON");
   }
 
   buildHTML = () => {
-    // let form = this.parent;
-    console.log('This is the build HTML function for static class static method')
+    this.addElAttrs(this.rootNode, {id: 'LoginForm'})
+    this.addElAttrs(this.email, {
+      type: 'email',
+      id: 'EmailInput',
+      class: 'LoginInput',
+      required: true,
+    })
+    this.rootNode.appendChild(this.email);
+
+    this.addElAttrs(this.password, {
+      type: 'password',
+      id: 'PasswordInput',
+      class: 'LoginInput',
+      required: true,
+    })
+    this.rootNode.appendChild(this.email);
+
+    this.addElAttrs(this.submit, {
+      type: 'submit',
+      value: 'Sign In',
+    })
+    this.rootNode.appendChild(this.submit)
+
+    this.labelFor(this.email);
+    this.labelFor(this.password);
+
+    return this.rootNode;
     // build the html and attributes needed to build the login form with javascript
     // this.defaultFields.forEach(el => form.appendChild(el))
   };
@@ -20,6 +46,12 @@ class LoginForm {
         node[attr] = val;
       }
     })
+  }
+
+  labelFor(node) {
+    let labelTag = document.createElement('LABEL');
+    labelTag.setAttribute('for', node.id)
+    node.insertAdjacentElement('beforebegin', labelTag);
   }
 
   render = (appendTo) => {
