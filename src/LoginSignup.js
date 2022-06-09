@@ -1,40 +1,38 @@
+// Utility class for building Login Form
 class LoginForm {
-  static defaultFields = {
-    email: document.createElement("INPUT"),
-    password: document.createElement("INPUT"),
-  }
-  constructor(targetNode, fields={}) {
-    this.self ||= document.createElement('FORM')
-    this.fields = {...defaultFields, ...fields}
-    this.html = buildHTML();   // use a class to help generate forms easily with instance methods for rendering and 'logging in'/checking authentication
+  constructor() {
+    this.rootNode = document.createElement("FORM");
+    this.email = document.createElement("INPUT");
+    this.password = document.createElement("INPUT");
   }
 
-  buildHTML = (parent) => {
-    // build the html and attributes needed to build the login form with javascript 
-    
+  buildHTML = () => {
+    // let form = this.parent;
+    console.log('This is the build HTML function for static class static method')
+    // build the html and attributes needed to build the login form with javascript
+    // this.defaultFields.forEach(el => form.appendChild(el))
+  };
 
-    parent.appendChild(this) // this should refer to the instance of the LoginForm class instantiated.
+  // arg must be valid html element attr for given node
+  addElAttrs = (node, {...args}) => {
+    Object.entries(args).forEach((attr, val) => {
+      if (node.hasAttribute(attr)) {
+        node[attr] = val;
+      }
+    })
   }
 
-  render = (rootNode) => {
+  render = (appendTo) => {
     //function to render form in to html, and render the login form html
-    rootNode.appendChild(rootNode)
+    appendTo.appendChild(this.buildHTML())
   }
-  // we should establish some sort of state in case the login fails, we can keep at the least the email value persisted on form submit
-
-  submit = () => {
-    // this function should submit the form to the specific route from the rails api, 
-    // fetch post request to api, submit should then take the api key and store it in cookies/session    
-  }
+  // this should be a static class that builds the forms needed
 }
 
 
-class SignUpForm extends LoginForm {
-  constructor() {
-    super()
+class SignUpForm {
     // Add only specific information to use for signup for a user.
-
+  
     // many methods should be inherited from the LoginForm class created to render the signup form, with one additional field for password confirmation
     //
-  }
 }
