@@ -1,29 +1,32 @@
 // Utility class for building Login Form
 class LoginForm {
-  constructor() {
+  constructor(id) {
     this.rootNode = document.createElement("FORM");
     this.email = document.createElement("INPUT");
     this.password = document.createElement("INPUT");
     this.submit = document.createElement("BUTTON");
+    this.buildHTML();
   }
 
   buildHTML = () => {
     this.addElAttrs(this.rootNode, {id: 'LoginForm'})
     this.addElAttrs(this.email, {
-      type: 'email',
+      tagType: 'email',
       id: 'EmailInput',
-      class: 'LoginInput',
-      required: true,
+      className: 'LoginInput',
+      required: true
     })
-    this.rootNode.appendChild(this.email);
+    labelFor(this.email, 'EmailInput')
+    this.rootNode.appendChild(this.email)
 
     this.addElAttrs(this.password, {
       type: 'password',
       id: 'PasswordInput',
-      class: 'LoginInput',
-      required: true,
+      className: 'LoginInput',
+      required: true
     })
-    this.rootNode.appendChild(this.email);
+    labelFor(this.password, 'PasswordInput')
+    this.rootNode.appendChild(this.password)
 
     this.addElAttrs(this.submit, {
       type: 'submit',
@@ -31,35 +34,35 @@ class LoginForm {
     })
     this.rootNode.appendChild(this.submit)
 
-    this.labelFor(this.email);
-    this.labelFor(this.password);
-
     return this.rootNode;
     // build the html and attributes needed to build the login form with javascript
     // this.defaultFields.forEach(el => form.appendChild(el))
-  };
+  }
 
   // arg must be valid html element attr for given node
-  addElAttrs = (node, {...args}) => {
-    Object.entries(args).forEach((attr, val) => {
-      if (node.hasAttribute(attr)) {
-        node[attr] = val;
+  addElAttrs = (node, attrs) => {
+    for (const a in attrs) {
+      if (!node.hasAttribute(a)) {
+        node[a] = attrs[a]
       }
-    })
-  }
+    }
+  };
 
-  labelFor(node) {
-    let labelTag = document.createElement('LABEL');
-    labelTag.setAttribute('for', node.id)
-    node.insertAdjacentElement('beforebegin', labelTag);
-  }
 
-  render = (appendTo) => {
+}; // END LoginForm Class
+
+const labelFor = (node) => {
+  let labelTag = document.createElement('LABEL');
+  labelTag.setAttribute('for', node.id)
+  node.insertAdjacentElement('beforebegin', labelTag);
+}
+
+const render = (appendTo, pbNode) => {
     //function to render form in to html, and render the login form html
-    appendTo.appendChild(this.buildHTML())
+    appendTo.appendChild(pbNode)
   }
   // this should be a static class that builds the forms needed
-}
+
 
 
 class SignUpForm {
