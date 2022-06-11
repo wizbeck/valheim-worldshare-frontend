@@ -1,7 +1,9 @@
+
 var endPoint = "http://localhost:3000/api/v1/worlds"
 var commentsEndPoint = "http://localhost:3000/api/v1/comments"
 
 document.addEventListener("DOMContentLoaded", () => {
+  checkAuth();
   // checkLogin(); this should hit the before !authenticate_user filter method on backend,
   // if user is logged in we should render the valheim worlds,
   // else, we render the login form
@@ -13,6 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   createWorldForm.addEventListener("submit", (e) => handleNewWorld(e))
   const worldContainer = document.getElementById('worlds-container')
 
+
+  const checkAuth = () => {
+    // fetches to checkAuth route, with the users cookie auth token to see if their key is expired?
+    // if expired, we send them to login screen,
+    // else we make data accessible for the user.
+  }
 const getWorlds = () => {
   fetch(endPoint)
   .then(resp => resp.json())
