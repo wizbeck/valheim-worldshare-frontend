@@ -2,7 +2,8 @@ summary {
   cursor: pointer;
 }
  body {
-   background-color: #c0dbf5;
+   /* background-color: #192736;
+   color: #ffffff; */
    
  }
 
@@ -10,11 +11,11 @@ summary {
   border-radius: 5px;
   cursor: pointer;
   padding: 10px;
-  color: #afb49f
+  /* color: #afb49f */
 }
 
  div#form-container {
-   background-color: #ffefd5;
+   /* background-color: #ffefd5; */
    padding: 20px;
    border-radius: 30px;
    text-align: center;
@@ -22,9 +23,16 @@ summary {
 
  li {
   border: 3px solid #2f4f4f;
-  background-color: #bbbbbb;
+  /* background-color: #bbbbbb; */
   padding: 10px;
   border-radius: 15px, 30px;
   list-style: none;
   margin-top: 5px;
+ }
+
+ .Wrapper__Login {
+    margin: auto;
+    width: 50%;
+    /* background-color: #211c18; */
+    border-radius: 0.5rem 1rem;
  }
