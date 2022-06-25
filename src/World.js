@@ -1,4 +1,6 @@
 class World {
+  static all = [];
+
   constructor(world, worldAttributes) {
     this.id = world.id
     this.name = worldAttributes.name
@@ -103,5 +105,3 @@ class World {
 
 
 }
-
-World.all = [];

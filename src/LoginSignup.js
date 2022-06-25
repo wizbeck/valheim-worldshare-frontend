@@ -1,70 +1,78 @@
 // Utility class for building Login Form
+class SignUpForm {
+  constructor() {
+    this.self = new DocumentFragment;
+  }
+    // Add only specific information to use for signup for a user.
+    // many methods should be inherited from the LoginForm class created to render the signup form, with one additional field for password confirmation
+    // buildTags should build
+};
+
 class LoginForm {
   constructor() {
-    this.rootNode = document.createElement("FORM");
-    this.email = document.createElement("INPUT");
-    this.password = document.createElement("INPUT");
-    this.submit = document.createElement("BUTTON");
+    this.self = new DocumentFragment;
+    this.buildForm(document.getElementById('forms'));
   }
 
-  buildHTML = () => {
-    this.addElAttrs(this.rootNode, {id: 'LoginForm'})
-    this.addElAttrs(this.email, {
-      type: 'email',
-      id: 'EmailInput',
-      class: 'LoginInput',
-      required: true,
-    })
-    this.rootNode.appendChild(this.email);
+  buildForm = (wrapper) => {
+    // Form attributes
+    let d = document.createElement('DIV');
+    d.className = 'Wrapper__Login'
+    let h = document.createElement('H1');
+    h.className = 'Wrapper__LoginHeader'
+    h.innerText = 'Log In';
+    let f = document.createElement('FORM');
+    f.action = '/login';
+    f.method = 'post';
+    f.id = 'LoginForm';
 
-    this.addElAttrs(this.password, {
-      type: 'password',
-      id: 'PasswordInput',
-      class: 'LoginInput',
-      required: true,
-    })
-    this.rootNode.appendChild(this.email);
+    // Email input
+    this.buildInputLF(
+      f,
+      'text',
+      'users[email]',
+      'Email'
+      );
 
-    this.addElAttrs(this.submit, {
-      type: 'submit',
-      value: 'Sign In',
-    })
-    this.rootNode.appendChild(this.submit)
+    // Password input
+    this.buildInputLF(
+      f,
+      'password',
+      'users[password]',
+      'Password'
+    );
 
-    this.labelFor(this.email);
-    this.labelFor(this.password);
+     let b = this.buildBtn('Log In');
 
-    return this.rootNode;
-    // build the html and attributes needed to build the login form with javascript
-    // this.defaultFields.forEach(el => form.appendChild(el))
+    d.append(h, f, b);
+    wrapper.append(d)
+
   };
 
-  // arg must be valid html element attr for given node
-  addElAttrs = (node, {...args}) => {
-    Object.entries(args).forEach((attr, val) => {
-      if (node.hasAttribute(attr)) {
-        node[attr] = val;
-      }
-    })
+  buildInputLF = (root, type='text', name=null, lblTxt='Input') => {
+    // create a label for the id argument
+    let d = document.createElement('DIV');
+    let l = document.createElement('LABEL');
+    let i =  document.createElement('INPUT');
+
+    d.className = 'LFInput__Wrapper'
+    l.className = 'LF__Label';
+    l.setAttribute('for', name);
+    l.innerText = lblTxt;
+    i.className = `LFInput__${type}`;
+    i.id = name;
+
+    d.append(l, i);
+    root.append(d);
+    // create an input with attributes
   }
 
-  labelFor(node) {
-    let labelTag = document.createElement('LABEL');
-    labelTag.setAttribute('for', node.id)
-    node.insertAdjacentElement('beforebegin', labelTag);
+  buildBtn = (txt) => {
+    let b = document.createElement("BUTTON");
+    b.type = 'submit';
+    b.innerText = txt;
+    return b;
   }
 
-  render = (appendTo) => {
-    //function to render form in to html, and render the login form html
-    appendTo.appendChild(this.buildHTML())
-  }
-  // this should be a static class that builds the forms needed
-}
 
-
-class SignUpForm {
-    // Add only specific information to use for signup for a user.
-  
-    // many methods should be inherited from the LoginForm class created to render the signup form, with one additional field for password confirmation
-    //
 }
