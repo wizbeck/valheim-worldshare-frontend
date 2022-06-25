@@ -9,9 +9,7 @@ window.addEventListener('load', () => {
   // if user is logged in we should render the valheim worlds,
   // else, we render the login form
   // login form, should have sign up button -> changes login form to have a sign up button.
-  let login = new LoginForm;
-  let root = document.querySelector('#root');
-  login.render(root);
+  new LoginForm;
   // getWorlds();
   });
 

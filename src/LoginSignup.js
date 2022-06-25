@@ -1,17 +1,8 @@
 // Utility class for building Login Form
-class SignUpForm {
-  constructor() {
-    this.self = new DocumentFragment;
-  }
-    // Add only specific information to use for signup for a user.
-    // many methods should be inherited from the LoginForm class created to render the signup form, with one additional field for password confirmation
-    // buildTags should build
-};
-
 class LoginForm {
   constructor() {
     this.self = new DocumentFragment;
-    this.buildForm(document.getElementById('forms'));
+    this.buildForm(document.getElementById('content'));
   }
 
   buildForm = (wrapper) => {
@@ -30,7 +21,7 @@ class LoginForm {
     this.buildInputLF(
       f,
       'text',
-      'users[email]',
+      'user[email]',
       'Email'
       );
 
@@ -38,14 +29,20 @@ class LoginForm {
     this.buildInputLF(
       f,
       'password',
-      'users[password]',
+      'user[password]',
       'Password'
     );
 
-     let b = this.buildBtn('Log In');
+     let b = this.buildBtn('Log In', 'INPUT');
+    f.append(b);
+    d.append(h, f);
+    wrapper.append(d);
 
-    d.append(h, f, b);
-    wrapper.append(d)
+    let signUpBtn = this.buildBtn('Sign Up', 'BUTTON');
+    signUpBtn.addEventListener('click', () => {
+      swapToSignup(wrapper);
+    })
+    d.prepend(signUpBtn);
 
   };
 
@@ -67,12 +64,59 @@ class LoginForm {
     // create an input with attributes
   }
 
-  buildBtn = (txt) => {
-    let b = document.createElement("BUTTON");
-    b.type = 'submit';
-    b.innerText = txt;
+  buildBtn = (txt, tag) => {
+    let b = document.createElement(tag);
+    if (tag === 'INPUT') {
+      b.type = 'submit';
+      b.value = txt;
+    } else {
+      b.innerText = txt;
+      b.id = 'Wrapper__LoginSwitch';
+    }
+    
     return b;
   }
+};
 
+// Global function to swap form to signup
+const swapToSignup = (container) => {
+  let h = container.querySelector('h1'),
+      f = container.querySelector('form'),
+      sbmt = container.querySelector('input[type="submit"]'),
+      sgnUp = container.querySelector('#Wrapper__LoginSwitch')
+  ;
 
+  h.innerText = 'Join the Valheim WorldShare Community';
+  f.action = '/signup';
+
+  // password conf wrapper div
+  let pcWrapper = document.createElement('DIV');
+  pcWrapper.className = 'LFInput__Wrapper';
+  
+  // Password Confirmation input
+  let passConf = document.createElement('INPUT');
+  passConf.type = 'password';
+  passConf.id = 'user[password_confirmation]';
+
+  // Password Conf label (append first)
+  let pcLabel = document.createElement('LABEL');
+  pcLabel.innerText = 'Password Confirm'
+  pcLabel.setAttribute('for', 'user[password_confirmation]');
+  pcLabel.className = 'LF__Label'
+
+  sbmt.value = 'Sign Up';
+  sgnUp.innerText = 'Log In';
+  sgnUp.addEventListener('click', () => {
+    resetLogin(container);
+  });
+
+  pcWrapper.append(pcLabel, passConf);
+  f.insertBefore(pcWrapper, sbmt);
+
+  console.log('changed');
+};
+
+const resetLogin = (wrapper) => {
+  wrapper.innerHTML = '';
+  new LoginForm;
 }
