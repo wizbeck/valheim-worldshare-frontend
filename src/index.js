@@ -95,7 +95,9 @@ const searchBar = document.getElementById('search')
 searchBar.addEventListener("keyup", (e) => filterSearch(e))
 
 function filterSearch(input){
- let searchedWorlds = World.all.filter(n => {return n.name.toUpperCase().includes(input.target.value.toUpperCase())})
+ let searchedWorlds = World.all.filter(n => {
+  return n.name.toUpperCase().includes(input.target.value.toUpperCase())
+  })
   worldContainer.innerHTML = ""
   searchedWorlds.forEach(w => {
     w.renderWorld();
@@ -129,3 +131,17 @@ function filterSearch(input){
 //     patchFetch(worldId, worldLikes);
 //   })
 // }
+
+const isloggedIn = (keys) => {
+  let checkBody = {
+    method: 'GET',
+    body: JSON.stringify({
+      user: localStorage.get('user_id'),
+      token: localStorage.get('token')
+    })
+  }
+  // if users jti token from local storage matches or is not expired,
+  // we direct the user to login again, and cannot access any data until they log in again.
+}
+
+
