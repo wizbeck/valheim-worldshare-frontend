@@ -38,3 +38,24 @@ summary {
     border-radius: 10px;
     padding: 10px;
  }
+
+ .Wrapper__LoginHeader {
+  margin: auto;
+  text-align: center;
+ }
+
+ .LFInput__Wrapper {
+  margin: 2rem 0;
+  font-size: 16pt;
+  margin: auto;
+ }
+
+ .LFInput__Wrapper > input {
+  padding: 5px;
+  margin-left: 0.5rem;
+ }
+
+ input[type='submit'], #Wrapper__LoginSwitch {
+  padding: 5px;
+  margin-left: 50%;
+ }

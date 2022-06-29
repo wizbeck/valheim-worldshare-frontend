@@ -20,7 +20,7 @@ class LoginForm {
     // Email input
     this.buildInputLF(
       f,
-      'text',
+      'email',
       'user[email]',
       'Email'
       );
@@ -44,6 +44,17 @@ class LoginForm {
     })
     d.prepend(signUpBtn);
 
+    // add event listener for sign up or login depending on which version of form is rendered
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      debugger
+      let form = e.target;
+      if (f.action.includes('login')) {
+        signIn(form);
+      } else if (f.action.includes('signup')) {
+        signUp(form);
+      }
+    })
   };
 
   buildInputLF = (root, type='text', name=null, lblTxt='Input') => {
@@ -57,6 +68,7 @@ class LoginForm {
     l.setAttribute('for', name);
     l.innerText = lblTxt;
     i.className = `LFInput__${type}`;
+    i.setAttribute('type', type);
     i.id = name;
 
     d.append(l, i);
@@ -89,6 +101,19 @@ const swapToSignup = (container) => {
   h.innerText = 'Join the Valheim WorldShare Community';
   f.action = '/signup';
 
+  //steam_id wrapper
+  let stIdWrapper = document.createElement('DIV');
+  stIdWrapper.className = 'LFInput__Wrapper';
+  // steam_id input
+  let stIdInput = document.createElement('INPUT');
+  stIdInput.type = 'text';
+  stIdInput.id = 'user[steam_id]';
+  // steam label
+  let stLabel = document.createElement('LABEL');
+  stLabel.innerText = 'Steam ID';
+  stLabel.setAttribute('for', stIdInput.id);
+  stLabel.className = 'LF__Label';
+
   // password conf wrapper div
   let pcWrapper = document.createElement('DIV');
   pcWrapper.className = 'LFInput__Wrapper';
@@ -101,7 +126,7 @@ const swapToSignup = (container) => {
   // Password Conf label (append first)
   let pcLabel = document.createElement('LABEL');
   pcLabel.innerText = 'Password Confirm'
-  pcLabel.setAttribute('for', 'user[password_confirmation]');
+  pcLabel.setAttribute('for', passConf.id);
   pcLabel.className = 'LF__Label'
 
   sbmt.value = 'Sign Up';
@@ -109,6 +134,12 @@ const swapToSignup = (container) => {
   sgnUp.addEventListener('click', () => {
     resetLogin(container);
   });
+
+  // we want to insert the steam ID underneath email so insert before password input wrapper
+
+  let pwWrapper = document.getElementById('user[password]').parentElement;
+  stIdWrapper.append(stLabel, stIdInput);
+  f.insertBefore(stIdWrapper, pwWrapper);
 
   pcWrapper.append(pcLabel, passConf);
   f.insertBefore(pcWrapper, sbmt);
@@ -119,4 +150,39 @@ const swapToSignup = (container) => {
 const resetLogin = (wrapper) => {
   wrapper.innerHTML = '';
   new LoginForm;
+}
+
+
+const signIn = (f) => {
+  // Login else render error message in a container?
+
+}
+
+const signUp = (f) => {
+  console.warn('in signUp');
+  let inputs = f.querySelectorAll('input').filter( i => {
+    i.type !== 'submit'
+  })
+  // collect all inputs from the form and build  a body object to be passed into the fetch function
+  debugger
+  // here we need to capture form data from submission to send via fetch
+  // make fetch request to 'log in' to api for access with jti
+  // fetch request for sign up
+  fetch('http://localhost:3000/signup', {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringfy({
+      user: {
+        ...formData
+      }
+    })
+    .then(res => {
+      // do somethin with res and set jti token to local storage
+    })
+    .catch(err => {
+      throw new Error('Could not sign up user:', err)
+    })
+  })
 }
