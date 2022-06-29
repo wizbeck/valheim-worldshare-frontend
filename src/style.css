@@ -1,11 +1,12 @@
 summary {
   cursor: pointer;
 }
- body {
-   /* background-color: #192736;
-   color: #ffffff; */
-   
- }
+
+body {
+  /* background-color: #192736;
+  color: #ffffff; */
+
+}
 
 #create-btn {
   border-radius: 5px;
@@ -14,48 +15,49 @@ summary {
   /* color: #afb49f */
 }
 
- div#form-container {
-   /* background-color: #ffefd5; */
-   padding: 20px;
-   border-radius: 30px;
-   text-align: center;
- }
+div#form-container {
+  /* background-color: #ffefd5; */
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+}
 
- li {
+li {
   border: 3px solid #2f4f4f;
   /* background-color: #bbbbbb; */
   padding: 10px;
   border-radius: 15px, 30px;
   list-style: none;
   margin-top: 5px;
- }
+}
 
- .Wrapper__Login {
-    margin: auto;
-    width: 50%;
-    /* background-color: #211c18; */
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 10px;
- }
+.Wrapper__Login {
+  margin: auto;
+  width: 50%;
+  /* background-color: #211c18; */
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+}
 
- .Wrapper__LoginHeader {
+.Wrapper__LoginHeader {
   margin: auto;
   text-align: center;
- }
+}
 
- .LFInput__Wrapper {
-  margin: 2rem 0;
-  font-size: 16pt;
-  margin: auto;
- }
+.LFInput__Wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  width: 300px;
+}
 
- .LFInput__Wrapper > input {
-  padding: 5px;
-  margin-left: 0.5rem;
- }
+#Wrapper__LoginSwitch {
+  padding: 8px;
+  width: 100%;
+}
 
- input[type='submit'], #Wrapper__LoginSwitch {
-  padding: 5px;
-  margin-left: 50%;
- }
+input {
+  padding: 8px;
+  width: 300px;
+}
